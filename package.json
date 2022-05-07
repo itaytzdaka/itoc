@@ -1,0 +1,20 @@
+{
+  "name": "itoc",
+  "version": "1.0.0",
+  "description": "shifts requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "joi": "^14.3.1",
+    "mysql": "^2.18.1",
+    "path": "^0.12.7"
+  }
+}

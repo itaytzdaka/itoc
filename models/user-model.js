@@ -28,7 +28,7 @@ class User {
                         break;
                     case "string.max": err.message = "שם משתמש לא יכול להיות יותר מ-15 תווים"
                         break;
-                    case "string.regex.base": err.message = "שם משתמש חייב להיות רשום באותיות באנגלית"
+                    case "string.regex.base": err.message = "שם משתמש חייב להיות רשום באותיות באנגלית וללא רווחים"
                         break;
                 }
             }
@@ -45,7 +45,7 @@ class User {
                         break;
                     case "string.max": err.message = "שם פרטי לא יכול להיות יותר מ-10 תווים"
                         break;
-                    case "string.regex.base": err.message = "שם פרטי חייב להיות רשום באותיות בעברית"
+                    case "string.regex.base": err.message = "שם פרטי חייב להיות רשום באותיות באנגלית וללא רווחים"
                         break;
                 }
             }
@@ -62,7 +62,7 @@ class User {
                         break;
                     case "string.max": err.message = "שם משפחה לא יכול להיות יותר מ-10 תווים"
                         break;
-                    case "string.regex.base": err.message = "שם משפחה חייב להיות רשום באותיות בעברית"
+                    case "string.regex.base": err.message = "שם משפחה חייב להיות רשום באותיות בעברית וללא רווחים"
                         break;
                 }
             }

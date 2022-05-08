@@ -10,7 +10,7 @@ function isAdmin(request, response, next) {
 
     const user = cookies.session;
     if(!user.isAdmin){
-        response.status(401).send("You are not admin");
+        response.status(401).send("You are not admin!");
         return;
     }
 

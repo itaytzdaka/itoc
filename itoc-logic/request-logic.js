@@ -1,13 +1,13 @@
 const dal = require("../data-access-layer/dal");
 
 async function getAllRequests() {
-    const sql = "SELECT * FROM requests";
+    const sql = "SELECT * FROM requests ORDER BY date";
     const requests = await dal.executeAsync(sql);
     return requests;
 }
 
 async function getRequestsOfUser(userName) {
-    const sql = "SELECT * FROM requests WHERE userName =?";
+    const sql = "SELECT * FROM requests WHERE userName =? ORDER BY date";
     const requests = await dal.executeAsync(sql, [userName]);
     return requests;
 }

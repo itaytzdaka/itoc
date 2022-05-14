@@ -41,6 +41,7 @@ router.post("/", isLoggedIn, async (request, response) => {
             request.body.fullName,
             request.body.shift,
             request.body.comment,
+            request.body.team,
             request.body.status
         );
 
@@ -66,9 +67,9 @@ router.post("/", isLoggedIn, async (request, response) => {
 router.put("/:id", isLoggedIn, async (request, response) => {
     try {
         const requestId = +request.params.id;
-        const {date, userName, fullName, shift, comment, status} = request.body;
+        const {date, userName, fullName, shift, comment, team, status} = request.body;
 
-        const requestToUpdate = new Request(requestId, date, userName, fullName, shift, comment, status);
+        const requestToUpdate = new Request(requestId, date, userName, fullName, shift, comment, team, status);
 
         // Validate vacation data: 
         const errors = requestToUpdate.validatePostOrPut();

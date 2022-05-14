@@ -15,11 +15,11 @@ async function getRequestsOfUser(userName) {
 //add a request
 async function addRequest(request) {
 
-    const { date, userName, fullName, shift, comment, status } = request;
+    const { date, userName, fullName, shift, comment, team, status } = request;
 
-    const sql = `INSERT INTO requests VALUES(?,?,?,?,?,?,?)`;
+    const sql = `INSERT INTO requests VALUES(?,?,?,?,?,?,?,?)`;
 
-    const info = await dal.executeAsync(sql, [null, date, userName, fullName, shift, comment, status]); 
+    const info = await dal.executeAsync(sql, [null, date, userName, fullName, shift, comment, team, status]); 
     request.requestId = info.insertId;
     return request;
 }
@@ -27,10 +27,10 @@ async function addRequest(request) {
 
 //update a request
 async function updateFullRequest(request) {
-    const { requestId, date, fullName, shift, comment, status } = request;
+    const { requestId, date, fullName, shift, comment, team, status } = request;
 
-    const sql = `UPDATE requests SET date = ?, fullName = ?, shift = ?, comment = ?, status = ? WHERE requestId = ?`;
-    const info = await dal.executeAsync(sql, [date, fullName, shift, comment, status, requestId]);
+    const sql = `UPDATE requests SET date = ?, fullName = ?, shift = ?, comment = ?, team = ?, status = ? WHERE requestId = ?`;
+    const info = await dal.executeAsync(sql, [date, fullName, shift, comment, team, status, requestId]);
     return info.affectedRows === 0 ? null : request;
 };
 

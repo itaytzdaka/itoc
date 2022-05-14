@@ -1,11 +1,12 @@
 const Joi = require("joi");
 
 class User {
-    constructor(userName, firstName, lastName, password, isAdmin) {
+    constructor(userName, firstName, lastName, password, team, isAdmin) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.team = team;
         this.isAdmin = isAdmin;
     }
 
@@ -78,6 +79,21 @@ class User {
                     case "string.min": err.message = "סיסמה חייבת להיות מעל 6 תווים"
                         break;
                     case "string.max": err.message = "סיסמה חייבת להיות עד 200 תווים"
+                        break;
+                }
+            }
+            return errors;
+        }),
+        team: Joi.string().required().min(2).max(20).error(errors => {
+            for (const err of errors) {
+                switch (err.type) {
+                    case "any.required": err.message = "חסר סוג מפעיל"
+                        break;
+                    case "any.empty": err.message = "סוג מפעיל לא יכול להיות ריק"
+                        break;
+                    case "string.min": err.message = "מפעיל חייב להיות לפחות 2 תווים"
+                        break;
+                    case "string.max": err.message = "מפעיל חייב להיות עד 20 תווים"
                         break;
                 }
             }

@@ -1,13 +1,14 @@
 const Joi = require("joi");
 
 class Status {
-    constructor(requestId, date, userName, fullName, shift, comment, status) {
+    constructor(requestId, date, userName, fullName, shift, comment, team, status) {
         this.requestId = requestId;
         this.date = date;
         this.userName = userName;
         this.fullName = fullName;
         this.shift = shift;
         this.comment = comment;
+        this.team = team;
         this.status = status;
     }
 
@@ -92,6 +93,21 @@ class Status {
                     case "string.max": err.message = "הערה לא יכולה להיות יותר מ-50 תווים"
                         break;
                     case "string.regex.base": err.message = "הערה חייבת להיות רשומה באותיות בעברית"
+                        break;
+                }
+            }
+            return errors;
+        }),
+        team: Joi.string().required().min(2).max(20).error(errors => {
+            for (const err of errors) {
+                switch (err.type) {
+                    case "any.required": err.message = "חסרה קבוצה"
+                        break;
+                    case "any.empty": err.message = "קבוצה לא יכולה להיות ריקה"
+                        break;
+                    case "string.min": err.message = "קבוצה חייבת להיות מעל 6 תווים"
+                        break;
+                    case "string.max": err.message = "קבוצה חייבת להיות עד 200 תווים"
                         break;
                 }
             }

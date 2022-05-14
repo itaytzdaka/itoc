@@ -27,6 +27,7 @@ router.post("/register", async (request, response) => {
             request.body.firstName,
             request.body.lastName,
             request.body.password,
+            request.body.team,
             0 //not admin
         );
 
@@ -101,10 +102,10 @@ router.get("/", isAdmin, async (request, response) => {
 router.put("/:userName", isAdmin, async (request, response) => {
     try {
 
-        const { firstName, lastName, password, isAdmin } = request.body;
+        const { firstName, lastName, password, team, isAdmin } = request.body;
         const userName = request.params.userName;
 
-        const userToUpdate = new User(userName, firstName, lastName, password, +isAdmin);
+        const userToUpdate = new User(userName, firstName, lastName, password, team, +isAdmin);
 
         // Validate user data 
         const errors = userToUpdate.validatePostOrPut();

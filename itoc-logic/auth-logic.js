@@ -10,9 +10,9 @@ async function register(user) {
     //user not admin
     user.isAdmin = 0;
 
-    const sql = `INSERT INTO Users VALUES(?,?,?,?,?,?)`;
+    const sql = `INSERT INTO Users VALUES(?,?,?,?,?,?,?)`;
 
-    await dal.executeAsync(sql, [null, user.userName, user.firstName, user.lastName, user.password, user.isAdmin]); // 0 = Not Admin
+    await dal.executeAsync(sql, [null, user.userName, user.firstName, user.lastName, user.password, user.team, user.isAdmin]); // 0 = Not Admin
 
     //delete password for security
     delete user.password;
@@ -27,7 +27,7 @@ async function login(credentials) {
     credentials.password = hash(credentials.password);
 
     const sql = `
-    SELECT firstName, lastName, userName, isAdmin
+    SELECT firstName, lastName, userName, team, isAdmin
     FROM Users
     WHERE username = ? AND password = ?`;
     const users = await dal.executeAsync(sql, [credentials.userName, credentials.password]);
@@ -42,8 +42,8 @@ async function updateFullUser(user) {
     // Hash user password: 
     user.password = hash(user.password);
 
-    const sql = `UPDATE users SET firstName = ?, lastName = ?, password = ?, isAdmin = ? WHERE userName = ?`;
-    const info = await dal.executeAsync(sql, [user.firstName, user.lastName, user.password, user.isAdmin, user.userName]);
+    const sql = `UPDATE users SET firstName = ?, lastName = ?, password = ?, team = ?, isAdmin = ? WHERE userName = ?`;
+    const info = await dal.executeAsync(sql, [user.firstName, user.lastName, user.password, user.team, user.isAdmin, user.userName]);
 
     //for security
     delete user.password;
@@ -60,7 +60,7 @@ async function getAllUsersNames() {
 
 //get All Users Names
 async function getAllUsers() {
-    const sql = `SELECT firstName, lastName, userName, isAdmin FROM Users`;
+    const sql = `SELECT firstName, lastName, userName, team, isAdmin FROM Users`;
     const users = await dal.executeAsync(sql);
     return users;
 }

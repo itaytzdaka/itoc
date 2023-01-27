@@ -23,6 +23,7 @@ router.get("/:userName", isLoggedIn, async (request, response) => {
     try {
         const userName = request.params.userName;
         const requests = await requestLogic.getRequestsOfUser(userName);
+        console.log(requests);
         response.json(requests);
     }
     catch (err) {

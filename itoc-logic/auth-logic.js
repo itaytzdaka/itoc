@@ -10,7 +10,7 @@ async function register(user) {
     //user not admin
     user.isAdmin = 0;
 
-    const sql = `INSERT INTO Users VALUES(?,?,?,?,?,?,?)`;
+    const sql = `INSERT INTO users VALUES(?,?,?,?,?,?,?)`;
 
     await dal.executeAsync(sql, [null, user.userName, user.firstName, user.lastName, user.password, user.team, user.isAdmin]); // 0 = Not Admin
 
@@ -28,7 +28,7 @@ async function login(credentials) {
 
     const sql = `
     SELECT firstName, lastName, userName, team, isAdmin
-    FROM Users
+    FROM users
     WHERE username = ? AND password = ?`;
     const users = await dal.executeAsync(sql, [credentials.userName, credentials.password]);
     const user = users[0];
@@ -53,14 +53,14 @@ async function updateFullUser(user) {
 
 //get All Users Names
 async function getAllUsersNames() {
-    const sql = `SELECT userName FROM Users`;
+    const sql = `SELECT userName FROM users`;
     const usersNames = await dal.executeAsync(sql);
     return usersNames;
 }
 
 //get All Users Names
 async function getAllUsers() {
-    const sql = `SELECT firstName, lastName, userName, team, isAdmin FROM Users`;
+    const sql = `SELECT firstName, lastName, userName, team, isAdmin FROM users`;
     const users = await dal.executeAsync(sql);
     return users;
 }
